@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <requestFocus />
+    </View>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/queryInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_default"
+        android:layout_marginTop="@dimen/spacing_default"
+        android:layout_marginEnd="@dimen/spacing_default"
+        android:hint="@string/query_hint"
+        android:theme="@style/ThemeOverlay.Flight.SearchInput"
+        app:hintEnabled="true"
+        app:startIconDrawable="@drawable/ic_arrow_back">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/queryEditText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:theme="@style/ThemeOverlay.Flight.SearchInput" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/suggestionsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:visibility="gone"
+        tools:listitem="@layout/list_item_suggestion" />
+
+    <LinearLayout
+        android:id="@+id/noMatchesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_default"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="@dimen/spacing_default"
+            android:importantForAccessibility="no"
+            android:maxHeight="150dp"
+            android:minHeight="100dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_not_found_state" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/query_no_matches"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

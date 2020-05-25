@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="route_dot_size">4dp</dimen>
+    <dimen name="map_camera_padding">32dp</dimen>
+    <dimen name="spacing_default">16dp</dimen>
+    <dimen name="spacing_default_small">8dp</dimen>
+</resources>

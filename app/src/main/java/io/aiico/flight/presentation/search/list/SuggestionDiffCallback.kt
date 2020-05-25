@@ -1,0 +1,14 @@
+package io.aiico.flight.presentation.search.list
+
+import androidx.recyclerview.widget.DiffUtil
+import io.aiico.flight.domain.Suggestion
+
+class SuggestionDiffCallback : DiffUtil.ItemCallback<Suggestion>() {
+
+    // not best parameter
+    override fun areItemsTheSame(oldItem: Suggestion, newItem: Suggestion): Boolean =
+        oldItem.location == newItem.location
+
+    override fun areContentsTheSame(oldItem: Suggestion, newItem: Suggestion): Boolean =
+        oldItem.fullName == newItem.fullName
+}

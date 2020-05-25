@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Flight</string>
+    <string name="query_hint">Input city name here</string>
+    <string name="departure_point_hint">Departure</string>
+    <string name="arrival_point_hint">Arrival</string>
+    <string name="search_button_text">Search</string>
+    <string name="query_no_matches">No matches</string>
+</resources>
