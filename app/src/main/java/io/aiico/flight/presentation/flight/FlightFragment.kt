@@ -1,11 +1,11 @@
 package io.aiico.flight.presentation.flight
 
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -96,7 +96,8 @@ class FlightFragment :
 
     private fun generateCityLabel(title: String): Bitmap {
         return with(IconGenerator(requireContext())) {
-            setStyle(IconGenerator.STYLE_ORANGE)
+            setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.background_marker))
+            setTextAppearance(R.style.TextAppearance_Flight_MarkerIcon)
             makeIcon(title)
         }
     }
@@ -108,7 +109,7 @@ class FlightFragment :
             }
             width(dotSize)
             geodesic(true)
-            color(Color.BLACK)
+            color(ContextCompat.getColor(requireContext(), R.color.colorRoute))
             pattern(mutableListOf(Dot(), Gap(dotSize)))
             map.addPolyline(this)
         }
@@ -120,6 +121,7 @@ class FlightFragment :
             position(position)
             rotation(rotation)
             anchor(0.5F, 0.5F)
+            zIndex(1F)
             flat(true)
             planeMarker = map.addMarker(this)
         }

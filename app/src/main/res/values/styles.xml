@@ -27,4 +27,8 @@
         <item name="colorOnSurface">@android:color/white</item>
     </style>
 
+    <style name="TextAppearance.Flight.MarkerIcon" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>

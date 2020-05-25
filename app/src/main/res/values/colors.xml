@@ -5,4 +5,6 @@
     <color name="colorAccent">#F67C02</color>
     <color name="colorWindowBackground">#2096F3</color>
     <color name="colorFlightPointSurface">#D7F1FF</color>
+    <color name="colorMarkerBackground">#E6FFB700</color>
+    <color name="colorRoute">#E1000000</color>
 </resources>
