@@ -3,7 +3,7 @@ package io.aiico.flight.presentation.utils
 import android.text.Editable
 import android.text.TextWatcher
 
-abstract class TextChangeAdapter: TextWatcher {
+abstract class TextChangeAdapter : TextWatcher {
 
     override fun afterTextChanged(s: Editable?) {
         // do nothing

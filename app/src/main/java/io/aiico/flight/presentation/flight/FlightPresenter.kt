@@ -70,6 +70,18 @@ class FlightPresenter(arguments: Bundle, view: FlightView) : BasePresenter<Fligh
         }
     }
 
+    fun onViewBecomesVisible() {
+        if (animator?.isPaused == true) {
+            animator?.resume()
+        }
+    }
+
+    fun onViewBecomesNotVisible() {
+        if (animator?.isStarted == true) {
+            animator?.pause()
+        }
+    }
+
     fun onMapInitialization() {
         with(view) {
             showPointMarker(startPointCoordinate, startPointName)
@@ -101,18 +113,6 @@ class FlightPresenter(arguments: Bundle, view: FlightView) : BasePresenter<Fligh
             addUpdateListener(animatorUpdateListener)
             addListener(animatorListener)
             start()
-        }
-    }
-
-    fun onViewBecomesVisible() {
-        if (animator?.isPaused == true) {
-            animator?.resume()
-        }
-    }
-
-    fun onViewBecomesNotVisible() {
-        if (animator?.isStarted == true) {
-            animator?.pause()
         }
     }
 

@@ -1,8 +1,8 @@
 package io.aiico.flight.presentation.route
 
 import android.os.Bundle
-import io.aiico.flight.presentation.base.BasePresenter
 import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.presentation.base.BasePresenter
 
 class RoutePresenter(view: RouteView) : BasePresenter<RouteView>(view) {
 
@@ -14,15 +14,15 @@ class RoutePresenter(view: RouteView) : BasePresenter<RouteView>(view) {
         arrivalPointSuggestion = savedInstanceState?.getParcelable(KEY_ARRIVAL_SUGGESTION)
     }
 
-    override fun onViewCreated(configurationChanged: Boolean) {
-        updateSearchButtonState()
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         with(outState) {
             putParcelable(KEY_DEPARTURE_SUGGESTION, departurePointSuggestion)
             putParcelable(KEY_ARRIVAL_SUGGESTION, arrivalPointSuggestion)
         }
+    }
+
+    override fun onViewCreated(configurationChanged: Boolean) {
+        updateSearchButtonState()
     }
 
     fun onSuggestionSelected(suggestion: Suggestion, tag: String) {

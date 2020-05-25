@@ -8,8 +8,8 @@ import io.reactivex.schedulers.Schedulers
 class SuggestionsInteractor(private val suggestionsRepository: SuggestionsRepository) {
 
     fun getSuggestions(rawQuery: String): Single<List<Suggestion>> =
-        Single.fromCallable { rawQuery.trim() }
-            .flatMap { query -> suggestionsRepository.getSuggestions(query) }
+        suggestionsRepository
+            .getSuggestions(rawQuery.trim())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

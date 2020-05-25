@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import io.aiico.flight.R
 import io.aiico.flight.domain.Suggestion
 
-class SuggestionsAdapter : ListAdapter<Suggestion, SuggestionViewHolder>(
-    SuggestionDiffCallback()
+class SuggestionsAdapter :
+    ListAdapter<Suggestion, SuggestionViewHolder>(SuggestionDiffCallback()
 ) {
 
     var itemClickCallback: ((Suggestion) -> Unit)? = null

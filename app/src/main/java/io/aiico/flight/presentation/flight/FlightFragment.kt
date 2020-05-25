@@ -12,14 +12,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMapLoadedCallback
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.Dot
-import com.google.android.gms.maps.model.Gap
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.maps.model.*
 import com.google.maps.android.ui.IconGenerator
 import io.aiico.flight.R
 import io.aiico.flight.domain.Suggestion
@@ -29,7 +22,11 @@ import io.aiico.flight.presentation.flight.FlightPresenter.Companion.KEY_END_POI
 import io.aiico.flight.presentation.flight.FlightPresenter.Companion.KEY_START_COORDINATE
 import io.aiico.flight.presentation.flight.FlightPresenter.Companion.KEY_START_POINT_NAME
 
-class FlightFragment : BaseFragment<FlightPresenter>(), FlightView, OnMapReadyCallback, OnMapLoadedCallback {
+class FlightFragment :
+    BaseFragment<FlightPresenter>(),
+    FlightView,
+    OnMapReadyCallback,
+    OnMapLoadedCallback {
 
     private lateinit var map: GoogleMap
     private lateinit var planeMarker: Marker
@@ -45,13 +42,29 @@ class FlightFragment : BaseFragment<FlightPresenter>(), FlightView, OnMapReadyCa
         cameraPadding = resources.getDimensionPixelSize(R.dimen.map_camera_padding)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_flight, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment).getMapAsync(this)
+        (childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment).getMapAsync(
+            this
+        )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onViewBecomesVisible()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onViewBecomesNotVisible()
     }
 
     override fun onMapReady(preparedMap: GoogleMap) {
@@ -128,16 +141,6 @@ class FlightFragment : BaseFragment<FlightPresenter>(), FlightView, OnMapReadyCa
             }
             map.animateCamera(CameraUpdateFactory.newLatLngBounds(build(), cameraPadding))
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        presenter.onViewBecomesVisible()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        presenter.onViewBecomesNotVisible()
     }
 
     companion object {

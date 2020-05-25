@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-
 fun Activity.hideKeyboard(focusView: View) {
     val imm = ContextCompat.getSystemService(this, InputMethodManager::class.java)
     imm?.hideSoftInputFromWindow(focusView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)

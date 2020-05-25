@@ -1,9 +1,9 @@
 package io.aiico.flight.presentation.route
 
-import io.aiico.flight.presentation.base.BaseView
 import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.presentation.base.BaseView
 
-interface RouteView: BaseView {
+interface RouteView : BaseView {
 
     fun showFlight(departurePointSuggestion: Suggestion, arrivalPointSuggestion: Suggestion)
 

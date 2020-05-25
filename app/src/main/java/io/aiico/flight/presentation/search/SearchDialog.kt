@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.aiico.flight.presentation.base.BaseDialogFragment
 import io.aiico.flight.R
 import io.aiico.flight.ServiceLocator
 import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.hideKeyboard
+import io.aiico.flight.presentation.base.BaseDialogFragment
 import io.aiico.flight.presentation.search.list.SuggestionsAdapter
 import io.aiico.flight.presentation.utils.TextChangeAdapter
-import io.aiico.flight.hideKeyboard
 import io.aiico.flight.toast
 import kotlinx.android.synthetic.main.fragment_search.*
 
@@ -41,7 +41,11 @@ class SearchDialog : BaseDialogFragment<SearchPresenter>(), SearchView {
         setStyle(STYLE_NO_FRAME, R.style.AppTheme_FullScreenDialog)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
         inflater.inflate(R.layout.fragment_search, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,7 +62,8 @@ class SearchDialog : BaseDialogFragment<SearchPresenter>(), SearchView {
     }
 
     private fun initRecyclerView() {
-        val dividerDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        val dividerDecoration =
+            DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         suggestionsRecyclerView.addItemDecoration(dividerDecoration)
         suggestionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         suggestionsRecyclerView.adapter = suggestionsAdapter

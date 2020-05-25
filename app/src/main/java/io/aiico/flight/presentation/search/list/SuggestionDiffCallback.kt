@@ -5,7 +5,6 @@ import io.aiico.flight.domain.Suggestion
 
 class SuggestionDiffCallback : DiffUtil.ItemCallback<Suggestion>() {
 
-    // not best parameter
     override fun areItemsTheSame(oldItem: Suggestion, newItem: Suggestion): Boolean =
         oldItem.location == newItem.location
 
