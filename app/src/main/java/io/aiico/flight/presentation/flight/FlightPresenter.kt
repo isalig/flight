@@ -14,7 +14,7 @@ import io.aiico.flight.presentation.base.BasePresenter
 import kotlin.math.abs
 
 class FlightPresenter(
-    flightInteractor: FlightInteractor,
+    private val flightInteractor: FlightInteractor,
     arguments: Bundle,
     view: FlightView
 ) : BasePresenter<FlightView>(view) {
@@ -55,7 +55,12 @@ class FlightPresenter(
         val evaluatedPoint = evaluator.evaluate(flightProgress)
         val newPosition = flightInteractor.toLatLng(evaluatedPoint)
 
-        planeRotation = calcPlaneRotation(newPosition)
+        // ignore "unreal" rotations
+        val newRotation = calcPlaneRotation(newPosition)
+        if (abs(newRotation - planeRotation) < MAX_PLANE_ROTATION_CHANGE) {
+            planeRotation = newRotation
+
+        }
         planeCoordinate = newPosition
 
         view.movePlaneMarker(planeCoordinate, planeRotation)
@@ -68,12 +73,14 @@ class FlightPresenter(
 
         planeRotation = savedInstanceState
             ?.getFloat(KEY_PLANE_ROTATION)
-            ?: calcPlaneRotation(endPointCoordinate)
+            ?: calcInitialPlaneRotation()
 
         savedInstanceState
             ?.getFloat(KEY_FLIGHT_PROGRESS)
             ?.let { savedProgress -> flightProgress = savedProgress }
     }
+
+    private fun calcInitialPlaneRotation(): Float = calcPlaneRotation(flightInteractor.toLatLng(controlPoints.second))
 
     override fun onSaveInstanceState(outState: Bundle) {
         with(outState) {
@@ -149,5 +156,6 @@ class FlightPresenter(
         private const val MAX_FRACTION = 1F
         private const val PLANE_ICON_DEFAULT_ROTATION = -90F
         private const val ANIMATION_DURATION = 10000
+        private const val MAX_PLANE_ROTATION_CHANGE = 30
     }
 }
