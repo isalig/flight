@@ -1,6 +1,6 @@
 package io.aiico.flight.presentation.route
 
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.domain.model.Suggestion
 import io.aiico.flight.presentation.base.BaseView
 
 interface RouteView : BaseView {

@@ -1,7 +1,7 @@
 package io.aiico.flight.presentation.route
 
 import android.os.Bundle
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.domain.model.Suggestion
 import io.aiico.flight.presentation.base.BasePresenter
 
 class RoutePresenter(view: RouteView) : BasePresenter<RouteView>(view) {

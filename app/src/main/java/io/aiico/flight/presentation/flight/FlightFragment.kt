@@ -15,7 +15,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.ui.IconGenerator
 import io.aiico.flight.R
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.ServiceLocator
+import io.aiico.flight.domain.model.Suggestion
 import io.aiico.flight.presentation.base.BaseFragment
 import io.aiico.flight.presentation.flight.FlightPresenter.Companion.KEY_END_COORDINATE
 import io.aiico.flight.presentation.flight.FlightPresenter.Companion.KEY_END_POINT_NAME
@@ -34,7 +35,8 @@ class FlightFragment :
     private var dotSize: Float = 0F
     private var cameraPadding: Int = 0
 
-    override fun createPresenter(): FlightPresenter = FlightPresenter(requireArguments(), this)
+    override fun createPresenter(): FlightPresenter =
+        FlightPresenter(ServiceLocator.getFlightInteractor(),requireArguments(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,9 +104,9 @@ class FlightFragment :
         }
     }
 
-    override fun showRoute(vararg pathPoints: LatLng) {
+    override fun showRoute(path: List<LatLng>) {
         with(PolylineOptions()) {
-            pathPoints.forEach { point ->
+            path.forEach { point ->
                 add(point)
             }
             width(dotSize)

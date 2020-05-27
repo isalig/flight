@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import io.aiico.flight.BuildConfig
 import io.aiico.flight.addTo
-import io.aiico.flight.domain.Suggestion
-import io.aiico.flight.domain.SuggestionsInteractor
+import io.aiico.flight.domain.model.Suggestion
+import io.aiico.flight.domain.interactor.SuggestionsInteractor
 import io.aiico.flight.presentation.base.BasePresenter
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit

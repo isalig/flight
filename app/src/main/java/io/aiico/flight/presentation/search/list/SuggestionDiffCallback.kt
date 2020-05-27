@@ -1,7 +1,7 @@
 package io.aiico.flight.presentation.search.list
 
 import androidx.recyclerview.widget.DiffUtil
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.domain.model.Suggestion
 
 class SuggestionDiffCallback : DiffUtil.ItemCallback<Suggestion>() {
 

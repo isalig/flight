@@ -1,6 +1,7 @@
-package io.aiico.flight.domain
+package io.aiico.flight.domain.interactor
 
 import io.aiico.flight.data.SuggestionsRepository
+import io.aiico.flight.domain.model.Suggestion
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

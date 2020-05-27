@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.view.isVisible
 import io.aiico.flight.R
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.domain.model.Suggestion
 import io.aiico.flight.presentation.base.BaseFragment
 import io.aiico.flight.presentation.flight.FlightFragment
 import io.aiico.flight.presentation.search.SearchDialog
@@ -62,6 +62,7 @@ class RouteFragment : BaseFragment<RoutePresenter>(), SearchDialog.SuggestionSel
                 FlightFragment.newInstance(departurePointSuggestion, arrivalPointSuggestion)
             )
             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+            .addToBackStack(null)
             .commit()
     }
 

@@ -1,7 +1,7 @@
 package io.aiico.flight.data
 
-import io.aiico.flight.domain.Location
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.domain.model.Location
+import io.aiico.flight.domain.model.Suggestion
 
 object DefaultSuggestionsService {
 
@@ -24,12 +24,18 @@ object DefaultSuggestionsService {
         Suggestion(
             fullName = "Санкт-Петербург, Россия",
             city = "Санкт-Петербург",
-            location = Location(latitude = 59.95F, longitude = 30.316668F)
+            location = Location(
+                latitude = 59.95F,
+                longitude = 30.316668F
+            )
         ),
         Suggestion(
             fullName = "Нью-Йорк, Нью-Йорк, США",
             city = "Нью-Йорк",
-            location = Location(latitude = 40.75603F, longitude = -73.98695F)
+            location = Location(
+                latitude = 40.75603F,
+                longitude = -73.98695F
+            )
         )
     )
 }

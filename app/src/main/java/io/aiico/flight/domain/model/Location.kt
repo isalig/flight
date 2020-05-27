@@ -1,4 +1,4 @@
-package io.aiico.flight.domain
+package io.aiico.flight.domain.model
 
 import android.os.Parcel
 import android.os.Parcelable

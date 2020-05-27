@@ -1,6 +1,6 @@
 package io.aiico.flight.data
 
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.domain.model.Suggestion
 import io.reactivex.Single
 
 class SuggestionsRepository(

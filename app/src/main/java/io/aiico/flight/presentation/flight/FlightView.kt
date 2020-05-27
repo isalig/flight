@@ -7,7 +7,7 @@ interface FlightView : BaseView {
 
     fun showPointMarker(position: LatLng, title: String)
 
-    fun showRoute(vararg pathPoints: LatLng)
+    fun showRoute(path: List<LatLng>)
 
     fun showScene(vararg boundsPoints: LatLng)
 

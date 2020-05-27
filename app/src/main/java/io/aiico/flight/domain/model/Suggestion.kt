@@ -1,4 +1,4 @@
-package io.aiico.flight.domain
+package io.aiico.flight.domain.model
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -12,7 +12,8 @@ data class Suggestion(
 
     constructor(parcel: Parcel) : this(
         parcel.readString() as String,
-        parcel.readParcelable<Location>(Location::class.java.classLoader) as Location,
+        parcel.readParcelable<Location>(
+            Location::class.java.classLoader) as Location,
         parcel.readString() as String
     )
 

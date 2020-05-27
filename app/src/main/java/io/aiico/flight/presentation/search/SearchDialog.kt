@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.aiico.flight.R
 import io.aiico.flight.ServiceLocator
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.domain.model.Suggestion
 import io.aiico.flight.hideKeyboard
 import io.aiico.flight.presentation.base.BaseDialogFragment
 import io.aiico.flight.presentation.search.list.SuggestionsAdapter

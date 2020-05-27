@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import io.aiico.flight.R
-import io.aiico.flight.domain.Suggestion
+import io.aiico.flight.domain.model.Suggestion
 
 class SuggestionsAdapter :
     ListAdapter<Suggestion, SuggestionViewHolder>(SuggestionDiffCallback()
