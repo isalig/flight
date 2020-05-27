@@ -1,11 +1,11 @@
 package io.aiico.flight.presentation.search
 
-import io.aiico.flight.domain.model.Suggestion
+import io.aiico.flight.domain.model.Destination
 import io.aiico.flight.presentation.base.BaseView
 
 interface SearchView : BaseView {
 
-    fun showList(suggestions: List<Suggestion>)
+    fun showList(destinations: List<Destination>)
 
     fun showError(message: String?)
 }

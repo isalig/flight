@@ -43,12 +43,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/suggestionsRecyclerView"
+        android:id="@+id/destinationsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
         android:visibility="gone"
-        tools:listitem="@layout/list_item_suggestion" />
+        tools:listitem="@layout/list_item_search_suggestion" />
 
     <LinearLayout
         android:id="@+id/noMatchesContainer"

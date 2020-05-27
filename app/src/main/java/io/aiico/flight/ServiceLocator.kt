@@ -4,14 +4,12 @@ import io.aiico.flight.data.DefaultSuggestionsService
 import io.aiico.flight.data.NetworkService
 import io.aiico.flight.data.SuggestionsRepository
 import io.aiico.flight.domain.interactor.FlightInteractor
-import io.aiico.flight.domain.interactor.SuggestionsInteractor
+import io.aiico.flight.domain.interactor.DestinationsInteractor
 
 object ServiceLocator {
 
-    fun getSuggestionsInteractor(): SuggestionsInteractor =
-        SuggestionsInteractor(
-            createSuggestionsRepository()
-        )
+    fun getDestinationsInteractor(): DestinationsInteractor =
+        DestinationsInteractor(createSuggestionsRepository())
 
     private fun createSuggestionsRepository(): SuggestionsRepository =
         SuggestionsRepository(NetworkService.api, DefaultSuggestionsService.suggestions)

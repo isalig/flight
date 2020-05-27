@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.view.isVisible
 import io.aiico.flight.R
-import io.aiico.flight.domain.model.Suggestion
+import io.aiico.flight.domain.model.Destination
 import io.aiico.flight.presentation.base.BaseFragment
 import io.aiico.flight.presentation.flight.FlightFragment
 import io.aiico.flight.presentation.search.SearchDialog
 import kotlinx.android.synthetic.main.fragment_route_points.*
 
-class RouteFragment : BaseFragment<RoutePresenter>(), SearchDialog.SuggestionSelectionListener,
+class RouteFragment : BaseFragment<RoutePresenter>(), SearchDialog.DestinationSelectionListener,
     RouteView {
 
     override fun createPresenter(): RoutePresenter = RoutePresenter(this)
@@ -52,14 +52,14 @@ class RouteFragment : BaseFragment<RoutePresenter>(), SearchDialog.SuggestionSel
     }
 
     override fun showFlight(
-        departurePointSuggestion: Suggestion,
-        arrivalPointSuggestion: Suggestion
+        departureDestination: Destination,
+        arrivalDestination: Destination
     ) {
         requireFragmentManager()
             .beginTransaction()
             .replace(
                 android.R.id.content,
-                FlightFragment.newInstance(departurePointSuggestion, arrivalPointSuggestion)
+                FlightFragment.newInstance(departureDestination, arrivalDestination)
             )
             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
             .addToBackStack(null)
@@ -74,8 +74,8 @@ class RouteFragment : BaseFragment<RoutePresenter>(), SearchDialog.SuggestionSel
         arrivalEditText.setText(name)
     }
 
-    override fun onSuggestionSelected(suggestion: Suggestion, tag: String) {
-        presenter.onSuggestionSelected(suggestion, tag)
+    override fun onDestinationSelected(destination: Destination, tag: String) {
+        presenter.onDestinationSelected(destination, tag)
     }
 
     override fun setSearchButtonEnabled(enabled: Boolean) {

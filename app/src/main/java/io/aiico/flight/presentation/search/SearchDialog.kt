@@ -11,20 +11,20 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.aiico.flight.R
 import io.aiico.flight.ServiceLocator
-import io.aiico.flight.domain.model.Suggestion
+import io.aiico.flight.domain.model.Destination
 import io.aiico.flight.hideKeyboard
 import io.aiico.flight.presentation.base.BaseDialogFragment
-import io.aiico.flight.presentation.search.list.SuggestionsAdapter
+import io.aiico.flight.presentation.search.list.DestinationsAdapter
 import io.aiico.flight.presentation.utils.TextChangeAdapter
 import io.aiico.flight.toast
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchDialog : BaseDialogFragment<SearchPresenter>(), SearchView {
 
-    private val suggestionsAdapter = SuggestionsAdapter()
-    private val selectionListener: SuggestionSelectionListener?
-        get() = parentFragment as? SuggestionSelectionListener
-            ?: activity as? SuggestionSelectionListener
+    private val destinationsAdapter = DestinationsAdapter()
+    private val selectionListener: DestinationSelectionListener?
+        get() = parentFragment as? DestinationSelectionListener
+            ?: activity as? DestinationSelectionListener
 
     private val queryTextWatcher: TextWatcher = object : TextChangeAdapter() {
 
@@ -34,7 +34,7 @@ class SearchDialog : BaseDialogFragment<SearchPresenter>(), SearchView {
     }
 
     override fun createPresenter(): SearchPresenter =
-        SearchPresenter(ServiceLocator.getSuggestionsInteractor(), this)
+        SearchPresenter(ServiceLocator.getDestinationsInteractor(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,23 +64,23 @@ class SearchDialog : BaseDialogFragment<SearchPresenter>(), SearchView {
     private fun initRecyclerView() {
         val dividerDecoration =
             DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        suggestionsRecyclerView.addItemDecoration(dividerDecoration)
-        suggestionsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        suggestionsRecyclerView.adapter = suggestionsAdapter
-        suggestionsAdapter.itemClickCallback = { suggestion ->
+        destinationsRecyclerView.addItemDecoration(dividerDecoration)
+        destinationsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        destinationsRecyclerView.adapter = destinationsAdapter
+        destinationsAdapter.itemClickCallback = { destination ->
             tag
                 ?.let { tag ->
-                    selectionListener?.onSuggestionSelected(suggestion, tag)
+                    selectionListener?.onDestinationSelected(destination, tag)
                 }
-                ?: throw IllegalStateException("SearchDialog requires tag to return suggestion selection")
+                ?: throw IllegalStateException("SearchDialog requires tag to return destination selection")
             dismiss()
         }
     }
 
-    override fun showList(suggestions: List<Suggestion>) {
-        suggestionsAdapter.submitList(suggestions)
-        suggestionsRecyclerView.isVisible = suggestions.isNotEmpty()
-        noMatchesContainer.isVisible = suggestions.isEmpty()
+    override fun showList(destinations: List<Destination>) {
+        destinationsAdapter.submitList(destinations)
+        destinationsRecyclerView.isVisible = destinations.isNotEmpty()
+        noMatchesContainer.isVisible = destinations.isEmpty()
     }
 
     override fun showError(message: String?) {
@@ -98,8 +98,8 @@ class SearchDialog : BaseDialogFragment<SearchPresenter>(), SearchView {
         fun newInstance() = SearchDialog()
     }
 
-    interface SuggestionSelectionListener {
+    interface DestinationSelectionListener {
 
-        fun onSuggestionSelected(suggestion: Suggestion, tag: String)
+        fun onDestinationSelected(destination: Destination, tag: String)
     }
 }

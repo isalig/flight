@@ -4,28 +4,28 @@ import android.os.Bundle
 import android.util.Log
 import io.aiico.flight.BuildConfig
 import io.aiico.flight.addTo
-import io.aiico.flight.domain.model.Suggestion
-import io.aiico.flight.domain.interactor.SuggestionsInteractor
+import io.aiico.flight.domain.interactor.DestinationsInteractor
+import io.aiico.flight.domain.model.Destination
 import io.aiico.flight.presentation.base.BasePresenter
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class SearchPresenter(
-    private val suggestionsInteractor: SuggestionsInteractor,
+    private val destinationsInteractor: DestinationsInteractor,
     view: SearchView
 ) : BasePresenter<SearchView>(view) {
 
     private val queryPublisher = PublishSubject.create<String>()
-    private var suggestions: List<Suggestion> = emptyList()
+    private var destinations: List<Destination> = emptyList()
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         savedInstanceState
-            ?.getParcelableArrayList<Suggestion>(KEY_SUGGESTIONS)
-            ?.let { suggestions -> this.suggestions = suggestions }
+            ?.getParcelableArrayList<Destination>(KEY_DESTINATIONS)
+            ?.let { destinations -> this.destinations = destinations }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(KEY_SUGGESTIONS, ArrayList(suggestions))
+        outState.putParcelableArrayList(KEY_DESTINATIONS, ArrayList(destinations))
     }
 
     override fun onViewCreated(configurationChanged: Boolean) {
@@ -33,28 +33,28 @@ class SearchPresenter(
             .debounce(200, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .switchMapSingle { query ->
-                suggestionsInteractor
-                    .getSuggestions(query)
+                destinationsInteractor
+                    .getDestinations(query)
                     .doOnError(::onError)
-                    .onErrorReturn { suggestions }
+                    .onErrorReturn { destinations }
             }
             .distinctUntilChanged()
-            .subscribe(::onSuggestionsUpdate, ::onError)
+            .subscribe(::onDestinationsUpdate, ::onError)
             .addTo(compositeDisposable)
 
         if (!configurationChanged) {
-            suggestionsInteractor
-                .getSuggestions("")
-                .subscribe(::onSuggestionsUpdate, ::onError)
+            destinationsInteractor
+                .getDestinations("")
+                .subscribe(::onDestinationsUpdate, ::onError)
                 .addTo(compositeDisposable)
         } else {
-            view.showList(suggestions)
+            view.showList(destinations)
         }
     }
 
-    private fun onSuggestionsUpdate(suggestions: List<Suggestion>) {
-        this.suggestions = suggestions
-        view.showList(suggestions)
+    private fun onDestinationsUpdate(destinations: List<Destination>) {
+        this.destinations = destinations
+        view.showList(destinations)
     }
 
     private fun onError(error: Throwable) {
@@ -69,6 +69,6 @@ class SearchPresenter(
     }
 
     companion object {
-        private const val KEY_SUGGESTIONS = "key_suggestions"
+        private const val KEY_DESTINATIONS = "key_destinations"
     }
 }
